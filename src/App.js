@@ -7,10 +7,16 @@ import SignInAndUp from './pages/sign-in-and-up/sign-in-and-up.component';
 
 import Header from './components/header/header.component';
 
+import { auth } from './firebase/firebase.utils';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+
 function App() {
+  const [currentUser] = useAuthState(auth);
+
   return (
     <div>
-      <Header />
+      <Header currentUser={currentUser}/>
       <Switch>
         <Route exact path='/shop' component={ShopPage} />
         <Route exact path='/signin' component={SignInAndUp} />
